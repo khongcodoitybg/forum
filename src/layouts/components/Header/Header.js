@@ -57,7 +57,7 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-    const currentUser = true;
+    const currentUser = false;
 
     // Handle logic
     const handleMenuChange = (menuItem) => {
@@ -68,6 +68,8 @@ function Header() {
             default:
         }
     };
+
+    const handleClickSignup = () => {};
 
     const userMenu = [
         {
@@ -98,7 +100,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <Link to={config.routes.home} className={cx('logo-link')}>
-                    <img src={images.logo} alt="Tiktok" />
+                    <Image src={images.logo} alt="logo" className={cx('logo')} />
                 </Link>
 
                 <Search />
@@ -125,8 +127,12 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Button text>Upload</Button>
-                            <Button primary>Log in</Button>
+                            <Button square to={config.routes.signup} onClick={handleClickSignup}>
+                                Sign up
+                            </Button>
+                            <Button square primary to={config.routes.login}>
+                                Log in
+                            </Button>
                         </>
                     )}
 
