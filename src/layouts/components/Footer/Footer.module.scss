@@ -8,11 +8,14 @@
     text-align: center;
 }
 
+.inner {
+}
+
 .social {
     display: flex;
     justify-content: center;
 
-    & a {
+    a {
         font-size: 2.4rem;
         padding: 0 6px;
 
@@ -28,7 +31,7 @@
     font-size: 1.8rem;
     font-weight: 600;
 
-    & a {
+    a {
         margin-left: 12px;
         color: #176093;
     }

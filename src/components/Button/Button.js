@@ -6,7 +6,6 @@ import styles from './Button.module.scss';
 const cx = classNames.bind(styles);
 
 function Button({
-    to,
     href,
     square = false,
     outline = false,
@@ -21,6 +20,7 @@ function Button({
     leftIcon,
     rightIcon,
     onClick,
+    to,
     ...passProps
 }) {
     let Comp = 'button';

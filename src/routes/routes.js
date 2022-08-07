@@ -21,7 +21,7 @@ const publicRoutes = [
     { path: config.routes.profile, component: Profile },
     { path: config.routes.upload, component: Upload, layout: HeaderOnly },
     { path: config.routes.search, component: Search, layout: null },
-    { path: config.routes.signup, component: Signup, layout: HeaderOnly },
+    { path: config.routes.signup, component: Signup },
     { path: config.routes.login, component: Login },
 ];
 

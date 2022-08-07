@@ -1,8 +1,7 @@
-// ...
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import styles from './Footer.scss';
+import styles from './Footer.module.scss';
 import { faFacebook, faInstagram, faPinterest, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 const cx = classNames.bind(styles);

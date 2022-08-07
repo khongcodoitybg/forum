@@ -23,6 +23,8 @@ import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
 
+import { useModal, Modal } from '~/layouts/components/Modal';
+
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -57,6 +59,8 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
+    const { isShowing, toggle } = useModal();
+
     const currentUser = false;
 
     // Handle logic
@@ -68,8 +72,6 @@ function Header() {
             default:
         }
     };
-
-    const handleClickSignup = () => {};
 
     const userMenu = [
         {
@@ -97,61 +99,64 @@ function Header() {
     ];
 
     return (
-        <header className={cx('wrapper')}>
-            <div className={cx('inner')}>
-                <Link to={config.routes.home} className={cx('logo-link')}>
-                    <Image src={images.logo} alt="logo" className={cx('logo')} />
-                </Link>
+        <>
+            <Modal isShowing={isShowing} hide={toggle} />
+            <header className={cx('wrapper')}>
+                <div className={cx('inner')}>
+                    <Link to={config.routes.home} className={cx('logo-link')}>
+                        <Image src={images.logo} alt="logo" className={cx('logo')} />
+                    </Link>
 
-                <Search />
+                    <Search />
 
-                <div className={cx('actions')}>
-                    {currentUser ? (
-                        <>
-                            <Tippy delay={[0, 50]} content="Upload video" placement="bottom">
-                                <button className={cx('action-btn')}>
-                                    <UploadIcon />
-                                </button>
-                            </Tippy>
-                            <Tippy delay={[0, 50]} content="Message" placement="bottom">
-                                <button className={cx('action-btn')}>
-                                    <MessageIcon />
-                                </button>
-                            </Tippy>
-                            <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
-                                <button className={cx('action-btn')}>
-                                    <InboxIcon />
-                                    <span className={cx('badge')}>12</span>
-                                </button>
-                            </Tippy>
-                        </>
-                    ) : (
-                        <>
-                            <Button square to={config.routes.signup} onClick={handleClickSignup}>
-                                Sign up
-                            </Button>
-                            <Button square primary to={config.routes.login}>
-                                Log in
-                            </Button>
-                        </>
-                    )}
-
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                    <div className={cx('actions')}>
                         {currentUser ? (
-                            <Image
-                                className={cx('user-avatar')}
-                                src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
-                                alt="Nguyen Van A"
-                            />
+                            <>
+                                <Tippy delay={[0, 50]} content="Upload video" placement="bottom">
+                                    <button className={cx('action-btn')}>
+                                        <UploadIcon />
+                                    </button>
+                                </Tippy>
+                                <Tippy delay={[0, 50]} content="Message" placement="bottom">
+                                    <button className={cx('action-btn')}>
+                                        <MessageIcon />
+                                    </button>
+                                </Tippy>
+                                <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
+                                    <button className={cx('action-btn')}>
+                                        <InboxIcon />
+                                        <span className={cx('badge')}>12</span>
+                                    </button>
+                                </Tippy>
+                            </>
                         ) : (
-                            <button className={cx('more-btn')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} />
-                            </button>
+                            <>
+                                <Button square to={config.routes.signup} onClick={toggle}>
+                                    Sign up
+                                </Button>
+                                <Button square primary to={config.routes.login} onClick={toggle}>
+                                    Log in
+                                </Button>
+                            </>
                         )}
-                    </Menu>
+
+                        <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                            {currentUser ? (
+                                <Image
+                                    className={cx('user-avatar')}
+                                    src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
+                                    alt="Nguyen Van A"
+                                />
+                            ) : (
+                                <button className={cx('more-btn')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </button>
+                            )}
+                        </Menu>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </>
     );
 }
 
