@@ -1,2 +1,2 @@
-export { default as Modal } from './ModalSignUp';
-export { default as useModal } from './useModal';
+export { default as ModalSignUp } from './ModalSignUp';
+export { default as ModalSignIn } from './ModalSignIn';

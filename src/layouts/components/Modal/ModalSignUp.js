@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind';
-import { faEye, faLock, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Modal.module.scss';
 import { useRef, useState } from 'react';
 import Button from '~/components/Button';
 import { Link } from 'react-router-dom';
 import config from '~/config';
-import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -62,11 +62,11 @@ function ModalSignUp({ isShowing, hide }) {
                             placeholder="New password"
                         />
                         {!showing ? (
-                            <button className={cx('eys-btn')} onClick={handleClickViewPass}>
+                            <button className={cx('eye-btn')} onClick={handleClickViewPass}>
                                 <FontAwesomeIcon icon={faEyeSlash} />
                             </button>
                         ) : (
-                            <button className={cx('eys-btn')} onClick={handleClickHidePass}>
+                            <button className={cx('eye-btn')} onClick={handleClickHidePass}>
                                 <FontAwesomeIcon icon={faEye} />
                             </button>
                         )}

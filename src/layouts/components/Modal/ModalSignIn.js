@@ -2,17 +2,30 @@ import classNames from 'classnames/bind';
 import { faLock, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Modal.module.scss';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Button from '~/components/Button';
 import { Link } from 'react-router-dom';
 import config from '~/config';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
 
 function ModalSignIn({ isShowing, hide }) {
     const inputAccountRef = useRef();
     const inputPasswordRef = useRef();
-    const inputPasswordRef = useRef();
+
+    const [type, setType] = useState('password');
+    const [showing, setShowing] = useState(false);
+
+    function handleClickViewPass() {
+        setShowing(!showing);
+        setType('text');
+    }
+
+    function handleClickHidePass() {
+        setShowing(!showing);
+        setType('password');
+    }
 
     return isShowing ? (
         <div className={cx('wrapper')}>
@@ -37,20 +50,29 @@ function ModalSignIn({ isShowing, hide }) {
                     <div className={cx('form-group')}>
                         <FontAwesomeIcon icon={faLock} />
                         <input
-                            type="text"
+                            type={type}
                             ref={inputPasswordRef}
                             className={cx('password-input')}
                             placeholder="Password"
                         />
+                        {!showing ? (
+                            <button className={cx('eye-btn')} onClick={handleClickViewPass}>
+                                <FontAwesomeIcon icon={faEyeSlash} />
+                            </button>
+                        ) : (
+                            <button className={cx('eye-btn')} onClick={handleClickHidePass}>
+                                <FontAwesomeIcon icon={faEye} />
+                            </button>
+                        )}
                     </div>
                     <Button square className={cx('submit')}>
-                        Sign up
+                        Login
                     </Button>
                 </div>
                 <footer className={cx('footer')}>
-                    <p>You had an account:</p>
+                    <p>You don't have account:</p>
                     <Link to={config.routes.login} className={cx('link')}>
-                        login
+                        signup
                     </Link>
                 </footer>
             </div>

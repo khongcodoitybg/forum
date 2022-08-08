@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import {
     faCircleQuestion,
     faCoins,
@@ -23,7 +24,7 @@ import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
 
-import { useModal, Modal } from '~/layouts/components/Modal';
+import { ModalSignUp, ModalSignIn } from '~/layouts/components/Modal';
 
 const cx = classNames.bind(styles);
 
@@ -59,7 +60,16 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-    const { isShowing, toggle } = useModal();
+    const [isShowingSignUp, setIsShowingSignUp] = useState(false);
+    const [isShowingSignIn, setIsShowingSignIn] = useState(false);
+
+    function toggleSignUp() {
+        setIsShowingSignUp(!isShowingSignUp);
+    }
+
+    function toggleSignIn() {
+        setIsShowingSignIn(!isShowingSignIn);
+    }
 
     const currentUser = false;
 
@@ -100,7 +110,9 @@ function Header() {
 
     return (
         <>
-            <Modal isShowing={isShowing} hide={toggle} />
+            <ModalSignUp isShowing={isShowingSignUp} hide={toggleSignUp} />
+            <ModalSignIn isShowing={isShowingSignIn} hide={toggleSignIn} />
+
             <header className={cx('wrapper')}>
                 <div className={cx('inner')}>
                     <Link to={config.routes.home} className={cx('logo-link')}>
@@ -131,10 +143,10 @@ function Header() {
                             </>
                         ) : (
                             <>
-                                <Button square to={config.routes.signup} onClick={toggle}>
+                                <Button square to={config.routes.signup} onClick={toggleSignUp}>
                                     Sign up
                                 </Button>
-                                <Button square primary to={config.routes.login} onClick={toggle}>
+                                <Button square primary to={config.routes.login} onClick={toggleSignIn}>
                                     Log in
                                 </Button>
                             </>
